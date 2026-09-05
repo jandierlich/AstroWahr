@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum – AstroWahr</title>
+<link rel="stylesheet" href="style.css">
+<script>
+(function () {
+  try {
+    var pref = localStorage.getItem('astrowahr.theme') || 'dark';
+    var effective = pref === 'system' ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : pref;
+    if (effective === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<div id="app">
+  <header class="topbar"><a href="index.html" class="back-btn" style="display:flex; text-decoration:none;">←</a><div class="brand"><div class="brand-badge">✨</div><h1>Impressum</h1></div></header>
+  <main id="view" style="padding-bottom:40px;">
+    <div class="legal-content">
+      <h3>Impressum</h3>
+      <p><b>Angaben gemäß § 5 DDG</b></p>
+      <p>Jan Dierlich<br>Steenacker 33<br>25499 Tangstedt<br>Deutschland</p>
+      <p><b>Kontakt</b><br>E-Mail: jandierlich@googlemail.com</p>
+      <p><b>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</b><br>Jan Dierlich (Anschrift wie oben)</p>
+      <h3>Haftungshinweis</h3>
+      <p>AstroWahr wird unentgeltlich und ohne Gewähr für private Nutzung zur Verfügung gestellt. Alle Inhalte sind unterhaltend gemeint; für Vollständigkeit oder Richtigkeit der berechneten astronomischen bzw. astrologischen Angaben wird keine Haftung übernommen.</p>
+      <p><a href="datenschutz.html">Zur Datenschutzerklärung</a></p>
+    </div>
+  </main>
+</div>
+</body>
+</html>

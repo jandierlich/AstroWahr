@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datenschutz – AstroWahr</title>
+<link rel="stylesheet" href="style.css">
+<script>
+(function () {
+  try {
+    var pref = localStorage.getItem('astrowahr.theme') || 'dark';
+    var effective = pref === 'system' ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : pref;
+    if (effective === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<div id="app">
+  <header class="topbar"><a href="index.html" class="back-btn" style="display:flex; text-decoration:none;">←</a><div class="brand"><div class="brand-badge">✨</div><h1>Datenschutz</h1></div></header>
+  <main id="view" style="padding-bottom:40px;">
+    <div class="legal-content">
+      <h3>Datenschutzerklärung</h3>
+      <p><b>Verantwortlicher</b><br>Jan Dierlich, Steenacker 33, 25499 Tangstedt, Deutschland, jandierlich@googlemail.com</p>
+      <h3>Keine Server-Übertragung</h3>
+      <p>AstroWahr ist eine reine Web-App (PWA), die vollständig lokal auf deinem Gerät läuft. Es findet keine Übertragung deiner Geburtsdaten oder anderer Eingaben an einen Server, an den Betreiber oder an Dritte statt. Es gibt kein Tracking, keine Analyse-Tools und keine Werbung.</p>
+      <h3>Lokale Speicherung (localStorage)</h3>
+      <p>Folgende Daten werden ausschließlich lokal in deinem Browser gespeichert (Schlüssel-Präfix „astrowahr."):</p>
+      <ul><li>Gespeicherte Geburtshoroskope: Bezeichnung, Geburtsdatum, Geburtsuhrzeit (falls angegeben), Zeitzone, geografische Koordinaten des Geburtsorts und Ortsname</li>
+      <li>Tarot-Bereich: als Favorit markierte Karten sowie anonyme Zähler zu gezogenen Legungen (keine Inhalte oder Ergebnisse einzelner Legungen)</li></ul>
+      <p>Diese beiden Kategorien verlassen dein Gerät nur, wenn du sie selbst über die Backup-Export-Funktion als Datei speicherst und weitergibst.</p>
+      <p>Zusätzlich wird deine Auswahl beim Erscheinungsbild (Hell/Dunkel/System) lokal gespeichert; diese ist nicht Teil des Backups, da sie jederzeit ohne Datenverlust neu gewählt werden kann.</p>
+      <p>Ebenfalls lokal gespeichert wird ein einzelnes Flag, ob die Einführungs-Tour bereits gesehen wurde – ohne weitere Inhalte.</p>
+      <h3>Keine Standortabfrage</h3>
+      <p>AstroWahr fragt keine Geräte-Standortdaten (Geolocation) ab. Geburtsorte werden manuell über eine Ortsauswahl oder durch Eingabe von Koordinaten festgelegt.</p>
+      <h3>Löschung</h3>
+      <p>Du kannst einzelne Profile jederzeit über den Papierkorb-Button oder alle Profile gesammelt über „Einstellungen → Alle Profile löschen" entfernen. Eine vollständige Löschung aller App-Daten ist zusätzlich über die Browser- bzw. iOS/Android-Systemeinstellungen möglich (App-Daten/Website-Daten löschen).</p>
+      <h3>Hosting</h3>
+      <p>Die App-Dateien werden über GitHub Pages ausgeliefert. Beim Aufruf verarbeitet GitHub als Hosting-Anbieter technisch bedingt IP-Adressen im Rahmen des Seitenaufrufs; nähere Informationen dazu stellt GitHub in seiner eigenen Datenschutzerklärung bereit.</p>
+      <p><a href="impressum.html">Zum Impressum</a></p>
+    </div>
+  </main>
+</div>
+</body>
+</html>
