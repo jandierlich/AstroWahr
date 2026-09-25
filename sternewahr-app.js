@@ -1178,13 +1178,24 @@
     $('place').textContent = st.place;
     buildTransport(); updateTransportUI(); measureInsets();
     applyDeepLink();
-    // Erststart: Standortabfrage anbieten
+    // Erststart: Standortabfrage anbieten – automatischer Standort hat nach bereits erteilter
+    // Freigabe immer Vorrang, dann wird er direkt übernommen statt erneut nachzufragen.
     if (!store.get('welcomed', false)) {
-      $('welcome').hidden = false;
-      $('wLoc').addEventListener('click', () => { store.set('welcomed', true); $('welcome').hidden = true; locate(); });
-      $('wLater').addEventListener('click', () => { store.set('welcomed', true); $('welcome').hidden = true; toast('Ort später im Menü unter „Ort“ einstellen.', 3500); });
+      if (navigator.permissions && navigator.permissions.query) {
+        navigator.permissions.query({ name: 'geolocation' }).then(status => {
+          if (status.state === 'granted') { store.set('welcomed', true); locate(); }
+          else showWelcome();
+        }).catch(() => showWelcome());
+      } else {
+        showWelcome();
+      }
     }
     requestAnimationFrame(frame);
+  }
+  function showWelcome() {
+    $('welcome').hidden = false;
+    $('wLoc').addEventListener('click', () => { store.set('welcomed', true); $('welcome').hidden = true; locate(); });
+    $('wLater').addEventListener('click', () => { store.set('welcomed', true); $('welcome').hidden = true; toast('Ort später im Menü unter „Ort“ einstellen.', 3500); });
   }
   window.__zh = {
     st, A, R, setTime: iso => setTime(Date.parse(iso)), setLoc: (la, lo, n) => setLocation(la, lo, n || 'Test', true), setView: (az, alt, fov) => { st.view.az = az; st.view.alt = alt; if (fov) st.view.fov = fov; invalidate(); },

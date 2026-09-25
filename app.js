@@ -960,6 +960,7 @@
     html += '<div id="sunResult"></div>';
     root.innerHTML = html;
 
+    const hadNoLoc = astroSunState.lat === null;
     document.getElementById('sunAutoLoc').addEventListener('click', function () {
       const btn = document.getElementById('sunAutoLoc');
       btn.disabled = true; btn.textContent = 'Ermittle Standort …';
@@ -978,6 +979,19 @@
       const match = CITY_PRESETS.find(function (c) { return c.name.toLowerCase() === e.target.value.trim().toLowerCase(); });
       if (match) { document.getElementById('sunLat').value = match.lat; document.getElementById('sunLon').value = match.lon; }
     });
+    // Bei manueller Eingabe: Tippt man ins Ortsfeld, wird es geleert, statt einen alten Wert löschen zu müssen.
+    document.getElementById('sunPlace').addEventListener('focus', function (e) { e.target.value = ''; });
+    // Automatischer Standort hat immer Vorrang: Wenn die Freigabe bereits erteilt wurde, wird
+    // der Standort beim Öffnen dieser Ansicht automatisch übernommen (ohne dass "Standort
+    // automatisch verwenden" erneut angetippt werden muss).
+    if (hadNoLoc) {
+      autoLocateIfGranted(function (loc) {
+        const latEl = document.getElementById('sunLat'), lonEl = document.getElementById('sunLon'), placeEl = document.getElementById('sunPlace');
+        if (!latEl) return; // Ansicht wurde inzwischen verlassen
+        astroSunState.lat = loc.lat; astroSunState.lon = loc.lon; astroSunState.place = loc.place || '';
+        latEl.value = loc.lat; lonEl.value = loc.lon; placeEl.value = loc.place || '';
+      });
+    }
     document.getElementById('sunDate').addEventListener('change', function (e) {
       const offsetSelect = document.getElementById('sunOffset');
       const wasAutoValue = parseFloat(offsetSelect.value) === euDefaultOffset(astroSunState.date);
@@ -1218,6 +1232,23 @@
       onOk && onOk(loc);
     }, function (err) { onErr && onErr(err); }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 20 * 60 * 1000 });
   }
+  // Prüft, ob die Standortfreigabe bereits erteilt wurde (ohne selbst einen Freigabe-Dialog auszulösen).
+  function geoPermissionState(cb) {
+    if (navigator.permissions && navigator.permissions.query) {
+      navigator.permissions.query({ name: 'geolocation' }).then(function (status) {
+        cb(status.state);
+      }).catch(function () { cb('unknown'); });
+    } else {
+      cb('unknown');
+    }
+  }
+  // Automatischer Standort hat nach erteilter Freigabe immer Vorrang: Ist die Berechtigung
+  // bereits erteilt, wird der Standort ohne weiteren Klick automatisch ermittelt.
+  function autoLocateIfGranted(onOk) {
+    geoPermissionState(function (state) {
+      if (state === 'granted') requestGeolocation(onOk, function () {});
+    });
+  }
   function openLocPicker(cb, initial) {
     const cur = initial || getSavedLoc() || { lat: '', lon: '', place: '' };
     const body =
@@ -1231,6 +1262,8 @@
       const match = CITY_PRESETS.find(function (c) { return c.name.toLowerCase() === e.target.value.trim().toLowerCase(); });
       if (match) { document.getElementById('locLat').value = match.lat; document.getElementById('locLon').value = match.lon; }
     });
+    // Bei manueller Eingabe: Tippt man ins Ortsfeld, wird es geleert, statt einen alten Wert löschen zu müssen.
+    document.getElementById('locPlace').addEventListener('focus', function (e) { e.target.value = ''; });
     document.getElementById('locAutoBtn').addEventListener('click', function () {
       const btn = document.getElementById('locAutoBtn');
       btn.disabled = true; btn.textContent = 'Ermittle Standort …';
@@ -1273,25 +1306,40 @@
         document.getElementById('skyChangeLoc').addEventListener('click', function () { openLocPicker(function (l) { saveLoc(l); paint(); }, loc); });
       } else {
         document.body.classList.remove('sky-immersive');
-        let html = '<p class="hint">Ein echter, im Browser selbst berechneter Sternenhimmel für deinen Standort – mit Zeitreise, Sternschnuppenströmen, Sternenlicht-Laufzeiten und der Möglichkeit, besondere Himmelsmomente zu speichern.</p>';
-        html += '<div class="card" style="text-align:center;">' +
-          '<div style="font-size:2rem; margin-bottom:8px;">📍</div>' +
-          '<p class="hint" style="margin-bottom:14px;">Für den Sternenhimmel deines Ortes braucht AstroWahr deinen Standort – einmalig, danach gemerkt.</p>' +
-          '<button class="btn" id="skyAutoLoc">Standort automatisch verwenden</button>' +
-          '<button class="btn secondary" id="skyManualLoc" style="margin-top:8px;">Ort manuell eingeben</button>' +
-          '</div>';
-        root.innerHTML = html;
-        const autoBtn = document.getElementById('skyAutoLoc');
-        if (autoBtn) autoBtn.addEventListener('click', function () {
-          autoBtn.disabled = true; autoBtn.textContent = 'Ermittle Standort …';
-          requestGeolocation(function () { paint(); }, function () {
-            autoBtn.disabled = false; autoBtn.textContent = 'Standort automatisch verwenden';
-            toast('Standort konnte nicht ermittelt werden. Bitte Berechtigung erlauben oder manuell eingeben.');
-          });
+        // Automatischer Standort hat nach erteilter Freigabe immer Vorrang vor der manuellen
+        // Eingabe: Erst prüfen, ob die Berechtigung schon erteilt ist, und den Standort dann
+        // ohne weiteren Klick übernehmen – die manuelle Auswahl erscheint nur, wenn das nicht
+        // möglich ist.
+        root.innerHTML = '<p class="hint" style="text-align:center; padding-top:24px;">📍 Standort wird geprüft …</p>';
+        geoPermissionState(function (state) {
+          if (state === 'granted') {
+            requestGeolocation(function () { paint(); }, function () { renderLocChoice(); });
+          } else {
+            renderLocChoice();
+          }
         });
-        const manBtn = document.getElementById('skyManualLoc');
-        if (manBtn) manBtn.addEventListener('click', function () { openLocPicker(function (l) { saveLoc(l); paint(); }); });
       }
+    }
+    function renderLocChoice() {
+      document.body.classList.remove('sky-immersive');
+      let html = '<p class="hint">Ein echter, im Browser selbst berechneter Sternenhimmel für deinen Standort – mit Zeitreise, Sternschnuppenströmen, Sternenlicht-Laufzeiten und der Möglichkeit, besondere Himmelsmomente zu speichern.</p>';
+      html += '<div class="card" style="text-align:center;">' +
+        '<div style="font-size:2rem; margin-bottom:8px;">📍</div>' +
+        '<p class="hint" style="margin-bottom:14px;">Für den Sternenhimmel deines Ortes braucht AstroWahr deinen Standort – einmalig, danach gemerkt.</p>' +
+        '<button class="btn" id="skyAutoLoc">Standort automatisch verwenden</button>' +
+        '<button class="btn secondary" id="skyManualLoc" style="margin-top:8px;">Ort manuell eingeben</button>' +
+        '</div>';
+      root.innerHTML = html;
+      const autoBtn = document.getElementById('skyAutoLoc');
+      if (autoBtn) autoBtn.addEventListener('click', function () {
+        autoBtn.disabled = true; autoBtn.textContent = 'Ermittle Standort …';
+        requestGeolocation(function () { paint(); }, function () {
+          autoBtn.disabled = false; autoBtn.textContent = 'Standort automatisch verwenden';
+          toast('Standort konnte nicht ermittelt werden. Bitte Berechtigung erlauben oder manuell eingeben.');
+        });
+      });
+      const manBtn = document.getElementById('skyManualLoc');
+      if (manBtn) manBtn.addEventListener('click', function () { openLocPicker(function (l) { saveLoc(l); paint(); }); });
     }
     paint();
   }

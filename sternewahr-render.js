@@ -229,8 +229,8 @@
 
       // Sternbildlinien
       if (L.constellations && (dark > 0.05 || L.allStars)) {
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = p.red ? 'rgba(255,90,70,0.32)' : 'rgba(170,150,255,0.34)';
+        ctx.lineWidth = 1.3;
+        ctx.strokeStyle = p.red ? 'rgba(255,110,90,0.55)' : 'rgba(190,175,255,0.58)';
         ctx.beginPath();
         for (const c of ST.constellations) {
           for (const l of c.lines) {
@@ -243,7 +243,7 @@
             ctx.moveTo(a.x + dx / d * g, a.y + dy / d * g); ctx.lineTo(b.x - dx / d * g, b.y - dy / d * g);
           }
         }
-        ctx.globalAlpha = clamp(dark * 1.4 + (L.allStars ? 0.7 : 0), 0, 1);
+        ctx.globalAlpha = clamp(dark * 1.6 + (L.allStars ? 0.75 : 0), 0, 1);
         ctx.stroke(); ctx.globalAlpha = 1;
       }
 
