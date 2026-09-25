@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quellen und Lizenzen – AstroWahr</title>
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+<script>
+(function () {
+  try {
+    var pref = localStorage.getItem('astrowahr.theme') || 'light';
+    var effective = pref === 'system' ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : pref;
+    if (effective === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<div id="app">
+  <header class="topbar"><a href="index.html" class="back-btn" style="display:flex; text-decoration:none;">←</a><div class="brand"><div class="brand-badge">✨</div><h1>Quellen &amp; Lizenzen</h1></div></header>
+  <main id="view" style="padding-bottom:40px;">
+    <div class="legal-content">
+      <h3>Eigener Code und eigene Gestaltung</h3>
+      <p>Programmcode, Gestaltung, Symbole, Tarot-Kartenkunst und Texte: © 2026 Jan Dierlich. Alle Rechte vorbehalten. AstroWahr verwendet keine fremden Programmbibliotheken, keine Web-Schriftarten (kein Google Fonts, kein Roboto o. Ä. – ausschließlich Systemschriften) und keine Bilddateien Dritter. Sämtliche grafischen Darstellungen (Radix-Chart, Tarotkarten, Kompassansichten, Sternenhimmel) werden vollständig im Programm erzeugt.</p>
+      <p class="hint">Der Quellcode ist auf GitHub öffentlich einsehbar, steht jedoch unter keiner Open-Source-Lizenz. Nutzung, Vervielfältigung, Veränderung oder Weiterverbreitung – auch auszugsweise – sind ohne vorherige schriftliche Zustimmung des Urhebers nicht gestattet.</p>
+      <h3>Berechnungsverfahren (veröffentlichte Fachliteratur)</h3>
+      <p>Mathematische Verfahren sind frei nutzbar; es wurde kein fremder Quellcode übernommen, alle Verfahren sind selbst implementiert. Der Astrologie-/Grundlagen-Bereich (Tageshoroskop, Geburtshoroskop, Transite, Kompatibilität, Mondkalender, „Himmel jetzt", Sonnenauf-/-untergang, Jahreszeiten) nutzt eine eigene Kepler-Implementierung nach der Methode von Paul Schlyter („How to compute planetary positions", gemeinfrei). Der Bereich „Sternenhimmel" nutzt eine eigenständige, genauere Berechnung nach folgenden veröffentlichten Quellen:</p>
+      <table>
+        <tr><th>Bereich</th><th>Quelle</th></tr>
+        <tr><td>Sonne, Mond (Reihenentwicklung), Nutation, Präzession, Sternzeit, Parallaxe, Refraktion, Mondphasen, Beleuchtung, Finsternisse</td><td>Jean Meeus: <i>Astronomical Algorithms</i>, 2. Auflage, Willmann-Bell, 1998</td></tr>
+        <tr><td>Planeten (Keplersche Bahnelemente)</td><td>E. M. Standish: <i>Keplerian Elements for Approximate Positions of the Major Planets</i>, NASA Jet Propulsion Laboratory</td></tr>
+        <tr><td>Differenz TT − UT (Delta T)</td><td>Polynomnäherungen nach F. Espenak und J. Meeus (NASA)</td></tr>
+        <tr><td>Sternschnuppenströme (Radianten, Maxima, Raten)</td><td>Veröffentlichte Almanachdaten der International Meteor Organization (IMO)</td></tr>
+        <tr><td>Galaktische Koordinaten</td><td>Standarddefinition der IAU (Galaktischer Nordpol und Zentrum für J2000)</td></tr>
+      </table>
+      <p>Beide Berechnungswege wurden unabhängig gegen bekannte Referenzereignisse abgeglichen (u. a. Äquinoktien/Sonnwenden, Sonnenfinsternisse 1999/2025/2026, Mondlandung).</p>
+      <h3>Sterndaten</h3>
+      <p>Die Auswahl von knapp 300 hellen Sternen und einigen Tief-Himmel-Objekten im Sternenhimmel-Bereich ist eine eigene Zusammenstellung. Positionen (Epoche J2000, ohne Eigenbewegung) und Helligkeiten sind astronomische Tatsachen, keine Kopie eines urheberrechtlich geschützten Katalogs. Sternbildfiguren sind eigene, vereinfachte Linienzüge. Bei rund 50 bekannten Sternen und Objekten zeigt die App zusätzlich die Entfernung in Lichtjahren als veröffentlichten Näherungswert aus der Fachliteratur.</p>
+      <h3>Tarot</h3>
+      <p>Tarot-Kartentexte und -Bilder sind eigene Erstellungen ohne Bezug zu bestehenden Decks (z. B. Rider-Waite-Smith); die Kartendaten wurden aus einem früheren eigenen Projekt (AEVARANNA) übernommen und thematisch angepasst.</p>
+      <h3>Weltraumkunde</h3>
+      <p>Eigenständig formulierte Fakten ohne Verwendung von Fotografien, Missionslogos oder sonstigen Bildern Dritter (z. B. NASA/ESA) – ausschließlich selbst gestaltete, vereinfachte Darstellungen.</p>
+      <h3>Genauigkeit und Grenzen</h3>
+      <ul>
+        <li>Sonne und Mond: Winkelfehler unter etwa 0,02 Grad (Sternenhimmel-Bereich) bzw. wenige Bogenminuten (übrige Astronomie/Astrologie). Finsternisse wurden mit bekannten Ereignissen abgeglichen.</li>
+        <li>Planeten: zwischen 1800 und 2050 meist besser als 0,1–0,3 Grad. Außerhalb dieses Zeitraums nutzen beide Berechnungswege eine weniger genaue Langzeitnäherung.</li>
+        <li>Sterne: Eigenbewegungen fehlen; für ferne Jahrhunderte weichen Sternpositionen daher sichtbar ab.</li>
+        <li>Die Milchstraße im Sternenhimmel ist ein stilisiertes Band, keine Messdaten. Kometen, Satelliten, die ISS und Polarlichter sind nicht enthalten. Die jährlichen Sternschnuppenströme sind mit veröffentlichten Näherungswerten enthalten; das tatsächliche Maximum kann um etwa einen Tag abweichen.</li>
+        <li>Entfernungsangaben in Lichtjahren sind Näherungswerte; die Fachliteratur kann leicht abweichende Werte nennen.</li>
+        <li>Magnetkompasse in Mobilgeräten weichen oft um einige Grad ab und werden durch Metall und Elektronik gestört; der Sternenhimmel-Bereich bietet dafür eine Kalibrierung an.</li>
+        <li>Mondzahlen der Gasriesen sind mit Stand 2026 gekennzeichnet, da sich diese durch neue Entdeckungen laufend ändern.</li>
+      </ul>
+      <h3>Sicherheitshinweis zur Sonnenbeobachtung</h3>
+      <p>Blicke niemals ohne einen geeigneten, zertifizierten Sonnenfilter (z. B. Sonnenfinsternisbrille nach ISO 12312-2) in die Sonne, auch nicht bei einer Finsternis und auch nicht durch Kamera, Fernglas oder Fernrohr. Die Darstellung in der App ist eine Simulation und ersetzt keine offizielle Finsternisvorhersage.</p>
+      <h3>Haftungsausschluss</h3>
+      <p>Alle astrologischen und Tarot-Inhalte sind als Unterhaltung/Reflexionshilfe gekennzeichnet, nicht als wissenschaftliche, medizinische, psychologische, rechtliche oder finanzielle Beratung. Die Angaben in der App werden ohne Gewähr bereitgestellt.</p>
+      <p><a href="impressum.html">Zum Impressum</a> · <a href="datenschutz.html">Zur Datenschutzerklärung</a></p>
+    </div>
+  </main>
+</div>
+</body>
+</html>

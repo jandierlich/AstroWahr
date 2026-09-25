@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datenschutz – AstroWahr</title>
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+<script>
+(function () {
+  try {
+    var pref = localStorage.getItem('astrowahr.theme') || 'light';
+    var effective = pref === 'system' ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : pref;
+    if (effective === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<div id="app">
+  <header class="topbar"><a href="index.html" class="back-btn" style="display:flex; text-decoration:none;">←</a><div class="brand"><div class="brand-badge">✨</div><h1>Datenschutz</h1></div></header>
+  <main id="view" style="padding-bottom:40px;">
+    <div class="legal-content">
+      <h3>Datenschutzerklärung</h3>
+      <p><b>Verantwortlicher</b><br>Jan Dierlich, Steenacker 33, 25499 Tangstedt, Deutschland, jandierlich@googlemail.com</p>
+      <h3>Keine Server-Übertragung</h3>
+      <p>AstroWahr ist eine reine Web-App (PWA), die vollständig lokal auf deinem Gerät läuft – das gilt auch für den eingebetteten Bereich „Sternenhimmel". Es findet keine Übertragung deiner Geburtsdaten, deines Standorts oder anderer Eingaben an einen Server, an den Betreiber oder an Dritte statt. Es gibt kein Tracking, keine Analyse-Tools und keine Werbung.</p>
+      <h3>Lokale Speicherung (localStorage)</h3>
+      <p>Folgende Daten werden ausschließlich lokal in deinem Browser gespeichert:</p>
+      <ul>
+        <li><b>Gespeicherte Geburtshoroskope</b> (Schlüssel-Präfix „astrowahr."): Bezeichnung, Geburtsdatum, Geburtsuhrzeit (falls angegeben), Zeitzone, geografische Koordinaten des Geburtsorts und Ortsname</li>
+        <li><b>Tarot-Bereich</b> (Präfix „astrowahr."): als Favorit markierte Karten sowie anonyme Zähler zu gezogenen Legungen (keine Inhalte oder Ergebnisse einzelner Legungen)</li>
+        <li><b>Aktueller Standort</b> (Präfix „astrowahr."): die zuletzt für „Sonnenauf-/-untergang" und „Sternenhimmel" verwendeten Koordinaten bzw. der Ortsname, damit du sie nicht erneut eingeben musst</li>
+        <li><b>Sternenhimmel-Bereich</b> (Präfix „zh:", eigener, davon unabhängiger Speicherbereich der eingebetteten Ansicht): zuletzt verwendeter Ort, Zeiteinstellungen, Anzeigeoptionen, eine Kompass-Kalibrierung (falls durchgeführt) sowie – wenn du sie anlegst – deine „Erinnerungen" (selbst gewählter Name, Zeitpunkt, Ort und Blickrichtung eines gemerkten Himmels) und, bei Nutzung der Funktion „Meine Geburtsnacht", das dort eingegebene Geburtsdatum und die Geburtszeit</li>
+      </ul>
+      <p>Diese Angaben verlassen dein Gerät nur, wenn du sie selbst über die Backup-Export-Funktion (Geburtshoroskope/Tarot) als Datei speicherst und weitergibst. Du kannst Erinnerungen einzeln im Sternenhimmel-Bereich löschen oder alle lokalen Daten der App auf einmal entfernen, indem du die Website-Daten für AstroWahr in deinem Browser löschst.</p>
+      <p>Zusätzlich wird deine Auswahl beim Erscheinungsbild (Hell/Dunkel/System) lokal gespeichert; diese ist nicht Teil des Backups, da sie jederzeit ohne Datenverlust neu gewählt werden kann. Ebenfalls lokal gespeichert wird ein einzelnes Flag, ob die Einführungs-Tour bereits gesehen wurde – ohne weitere Inhalte.</p>
+      <h3>Standort (Geolocation)</h3>
+      <p>Für „Sonnenauf-/-untergang" und für den „Sternenhimmel" kannst du deinen Standort automatisch ermitteln lassen (Button „Standort automatisch verwenden"). Dabei fragt dein Browser oder Betriebssystem eine Berechtigung ab; erst nach deiner Zustimmung ermittelt AstroWahr deinen Standort. Die Koordinaten werden ausschließlich lokal auf deinem Gerät verarbeitet und gespeichert (siehe oben) und nie an einen Server übertragen. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO in Verbindung mit § 25 Abs. 1 TDDDG), die du jederzeit in den Einstellungen deines Browsers oder Geräts widerrufen kannst. Alternativ kannst du für jede dieser Funktionen weiterhin jederzeit einen Ort von Hand eingeben oder aus der Vorschlagsliste wählen – eine automatische Ortsermittlung ist nie Voraussetzung für die Nutzung. Geburtsorte in Horoskopen sind davon unabhängig und werden ausschließlich manuell eingegeben, da es sich um frühere bzw. fremde Orte handelt.</p>
+      <h3>Bewegungs-/Ausrichtungssensoren und Kamera (nur im Sternenhimmel)</h3>
+      <p>Im eingebetteten Bereich „Sternenhimmel" kannst du optional die Lagesensoren deines Geräts nutzen, damit sich die Ansicht wie durch ein Fenster mit deiner Bewegung mitdreht, sowie optional die Kamera, um das Kamerabild als Hintergrund zu zeigen (erweiterte Realität). Beides wird nur nach deiner ausdrücklichen Erlaubnis aktiviert, ausschließlich im Browser ausgewertet bzw. angezeigt, nicht aufgezeichnet, nicht gespeichert und nicht übertragen. Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO i. V. m. § 25 Abs. 1 TDDDG).</p>
+      <h3>Löschung</h3>
+      <p>Du kannst einzelne Profile jederzeit über den Papierkorb-Button oder alle Profile gesammelt über „Einstellungen → Alle Profile löschen" entfernen, Erinnerungen einzeln im Sternenhimmel-Bereich löschen und den gespeicherten Standort dort jederzeit ändern. Eine vollständige Löschung aller App-Daten ist zusätzlich über die Browser- bzw. iOS-Systemeinstellungen möglich (App-Daten/Website-Daten löschen).</p>
+      <h3>Hosting</h3>
+      <p>Die App-Dateien werden über GitHub Pages ausgeliefert (Anbieter: GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA, eine Tochtergesellschaft der Microsoft Corporation). Beim Aufruf verarbeitet GitHub technisch bedingt deine IP-Adresse sowie übliche Verbindungsdaten. Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und zuverlässigen Bereitstellung der App (Art. 6 Abs. 1 lit. f DSGVO).</p>
+      <p><b>Hinweis zur Datenübermittlung in die USA:</b> Die USA gelten datenschutzrechtlich als Drittland. Die Übermittlung erfolgt auf Grundlage des Angemessenheitsbeschlusses der EU-Kommission zum EU-US Data Privacy Framework (Art. 45 DSGVO), unter dem GitHub zertifiziert ist. Weitere Informationen findest du in der Datenschutzerklärung von GitHub.</p>
+      <h3>Keine Weitergabe, keine Profilbildung</h3>
+      <p>Es findet keine Weitergabe personenbezogener Daten an Dritte durch die App statt. Es erfolgt keine automatisierte Entscheidungsfindung und keine Profilbildung.</p>
+      <h3>Deine Rechte</h3>
+      <p>Dir stehen nach der DSGVO die Rechte auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21) zu; eine erteilte Einwilligung kannst du jederzeit mit Wirkung für die Zukunft widerrufen. Wende dich dazu an die oben genannte E-Mail-Adresse. Du hast außerdem das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zuständig ist das Unabhängige Landeszentrum für Datenschutz Schleswig-Holstein, Holstenstraße 98, 24103 Kiel.</p>
+      <p><a href="impressum.html">Zum Impressum</a> · <a href="lizenzen.html">Zu Quellen und Lizenzen</a></p>
+    </div>
+  </main>
+</div>
+</body>
+</html>
